@@ -1,0 +1,425 @@
+1)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a,b,c;
+    cout<<"Enter a,b\n";
+    cin>>a>>b;
+    try
+    {
+        if(b==0)
+            throw "Divide by zero error";
+        if(b==1)
+            throw a;
+        c=a/b;
+    }
+    catch(const char *msg)
+    {
+        cout<<msg;exit(0);
+    }
+    catch(int x)
+    {
+        cout<<"\nResult : "<<x;exit(0);
+    }
+    cout<<"Result : "<<c;
+    return 0;
+}
+
+
+2)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    int x;
+    cout<<"Enter a no:";
+    cin>>x;
+    try
+    {
+        if(x>=0&&x<=9)
+            throw "\nIt is a single no";
+        else
+            throw exception();
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;exit(0);
+    }
+    catch(...)
+    {
+        cout<<"not a single digit";exit(0);
+    }
+
+    return 0;
+}
+
+
+3)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    float num1,num2,ans;
+    char Operator;
+    cout<<"perform arithmetic operation on 2 numbers";
+    try
+    {
+        cout<<"\nEnter first no: ";
+        cin>>num1;
+
+        cout<<"\nEnter operator ";
+        cin>>Operator;
+        if(Operator!='+'&&Operator!='-'&&Operator!='*'&&Operator!='/')
+            throw Operator;
+        cout<<"\nEnter second number";
+        cin>>num2;
+        switch(Operator)
+        {
+            case '+':ans=num1+num2;
+                    break;
+            case '-':ans=num1-num2;
+                    break;
+            case '*':ans=num1*num2;
+                    break;
+            case '/':if(num1==0)
+                    throw 0;
+                    ans=num1/num2;
+                    break;
+        }
+        cout<<"\nanswer :"<<num1<<" "<<Operator<<" "<<num2<<" = "<<ans;
+    }
+    catch(const char c)
+    {
+        cout<<"Bad operator";exit(0);
+    }
+    catch(const int x)
+    {
+        cout<<"\nBad operation";
+    }
+    return 0;
+}
+
+
+4)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    char email[50];int flag=0;
+    cout<<"Enter email id ";
+    fgets(email,50,stdin);
+    for(int i=0;email[i]!='\0';i++)
+    {
+        if(email[i]=='@')
+        {
+            flag=1;
+            break;
+        }
+    }
+    try
+    {
+       if(flag==0)
+            throw "Email should contain '@' symbol";
+    }
+    catch (const char *msg)
+    {
+        cout<<msg;
+        exit(0);
+    }
+    cout<<"Thanks!";
+
+    return 0;
+}
+
+
+5)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    long long mob,x;int count=0;
+    cout<<"Enter mobile no\n";
+    cin>>mob;
+    x=mob;
+    while(x!=0)
+    {
+        count++;
+        x=x/10;
+    }
+    try
+    {
+        if(count!=10)
+            throw "Mobile no should be of 10 digits!";
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;
+        exit(0);
+    }
+    cout<<"\nThanks!";
+    return 0;
+}
+
+
+6)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    long long pin;int count=0;
+    cout<<"Enter area pin code ";
+    cin>>pin;
+    int x=pin;
+    while(x!=0)
+    {
+        count++;
+        x=x/10;
+    }
+    try
+    {
+        if(count!=6)
+            throw "Pin code should be of six digits ";
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;exit(0);
+    }
+    cout<<"Thanks!";
+    return 0;
+}
+
+
+7)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    char user[20];int flag=0,countalpha=0,countSymbolDigit=-1;
+    cout<<"Enter username\n";
+    fgets(user,20,stdin);
+    for(int i=0;user[i]!='\0';i++)
+    {
+        flag=0;
+        if(user[i]>='A'&&user[i]<='Z'||user[i]>='a'&&user[i]<='z')
+        {
+            countalpha++;
+            flag=1;
+        }
+        if(flag==0)
+        {
+            countSymbolDigit++;
+        }
+    }
+
+    try
+    {
+        if(countalpha>=6)
+            throw "Username should contain less than 6 characters!";
+        if(countSymbolDigit>=1)
+            throw countSymbolDigit;
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;
+        exit(0);
+    }
+    catch(int x)
+    {
+        cout<<"Username should not contain "<<x<<" characters/digits ";
+        exit(0);
+    }
+    cout<<"\nThanks!";
+    return 0;
+}
+
+
+8)
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    char p[20];int counta=0,countd=0,counts=0,countA=0;
+    cout<<"Enter password!\n";
+    fgets(p,20,stdin);
+    p[strlen(p)-1]='\0';
+    for(int i=0;p[i]!='\0';i++)
+    {
+        if(p[i]>='A'&&p[i]<='Z')
+            countA++;
+        else if(p[i]>='a'&&p[i]<='z')
+            counta++;
+        else if(p[i]>='0'&&p[i]<='9')
+            countd++;
+        else counts++;
+    }
+    try
+    {
+        if((counta+countA+countd+counts)<6)
+            throw "\nPassword should contain atleast 6 characters! ";
+        else if(countA==0)
+            throw 'A';
+        else if(countd==0)
+            throw countd;
+        if(counts==0)
+            throw exception();
+    }
+
+    catch(const char msg[])
+    {
+        cout<<msg;
+        exit(0);
+    }
+    catch(char c)
+    {
+        cout<<"\nPassword should contain atleast one capital letter";exit(0);
+    }
+    catch(int x)
+    {
+        cout<<"\nPassword should contain atleast a digit!";exit(0);
+    }
+    catch(...)
+    {
+        cout<<"\nPassword should contain atleast a symbol!";exit(0);
+    }
+    cout<<"Thanks!";
+    return 0;
+}
+
+
+9)
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    char email[30];int i,flag=0,indicator=0;
+    cout<<"Enter email id ";
+    fgets(email,30,stdin);
+    for(i=0;email[i]!='\0';i++)
+    {
+        if(email[i]=='@')
+        {
+            flag=1;
+            break;
+        }
+    }
+    for(i=0;email[i]!='\0';i++)
+    {
+        if(email[i]=='g')
+        {
+            i++;
+            if(email[i]=='m')
+            {
+                i++;
+                if(email[i]=='a')
+                {
+                    i++;
+                    if(email[i]=='i')
+                    {
+                        i++;
+                        if(email[i]=='l')
+                        {
+                            i++;
+                            if(email[i]=='.')
+                            {
+                                i++;
+                                if(email[i]=='c')
+                                {
+                                    i++;
+                                    if(email[i]=='o')
+                                    {
+                                        i++;
+                                        if(email[i]=='m')
+                                        {
+                                            indicator=1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    try
+    {
+        if(flag==0)
+            throw "Email should contain '@' symbol!";
+        else if(indicator==0)
+            throw exception();
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;
+        exit(0);
+    }
+    catch(...)
+    {
+        cout<<"\nEmail should contain 'gmail.com'";exit(0);
+    }
+    cout<<"\nThanks";
+
+    return 0;
+}
+
+
+
+
+10)
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    char nick[20];
+    int countd=0,counta=0,counts=0;
+    fgets(nick,20,stdin);
+    nick[strlen(nick)-1]='\0';                                      //so as not to count \n as a symbol,hence I've kept counts=-1;
+    for(int i=0;nick[i]!='\0';i++)
+    {
+        if(nick[i]>='A'&&nick[i]<='Z'||nick[i]>='a'&&nick[i]<='z')
+            counta++;
+        else
+            if(nick[i]>='0'&&nick[i]<='9')
+            countd++;
+        else
+            counts++;
+    }
+
+    try
+    {
+        if(counta>8)
+            throw "\nNickname should not contain more than 8 characters";
+        else if(countd>=1)
+            throw countd;
+        else if(counts>=1)
+            throw exception();
+    }
+    catch(const char msg[])
+    {
+        cout<<msg;exit(0);
+    }
+    catch(int x)
+    {
+        cout<<"\nNickname should not contain any digit!";exit(0);
+    }
+    catch(...)
+    {
+        cout<<"\nNickname should not contain any symbol";exit(0);
+    }
+    cout<<"\nThanks";
+    return 0;
+}
